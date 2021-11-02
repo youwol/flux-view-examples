@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-interface Item {
+export interface Item {
     id: number
     name: string
     done: boolean
@@ -11,12 +11,14 @@ export class AppState {
 
     static STORAGE_KEY = "todos";
 
-    items$ = new BehaviorSubject<Item[]>(JSON.parse(localStorage.getItem(AppState.STORAGE_KEY) || "[]"))
-
+    items$: BehaviorSubject<Item[]>
     completed$: Observable<boolean>
     remaining$: Observable<Item[]>
 
-    constructor() {
+    constructor(items?: Array<Item>) {
+        this.items$ = items
+            ? new BehaviorSubject<Item[]>(items)
+            : new BehaviorSubject<Item[]>(JSON.parse(localStorage.getItem(AppState.STORAGE_KEY) || "[]"))
 
         this.items$.subscribe(items => {
             localStorage.setItem(AppState.STORAGE_KEY, JSON.stringify(items));
@@ -25,7 +27,7 @@ export class AppState {
             map(items => items.reduce((acc, item) => acc && item.done, true))
         )
         this.remaining$ = this.items$.pipe(
-            map(items => items.filter((item) => item.done))
+            map(items => items.filter((item) => !item.done))
         )
     }
 

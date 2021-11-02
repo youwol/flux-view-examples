@@ -1,0 +1,8 @@
+
+
+.item-remove{
+    opacity: 0;
+}
+.item-view:hover .item-remove{
+    opacity: 1;
+}
