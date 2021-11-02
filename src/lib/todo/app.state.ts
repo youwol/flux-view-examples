@@ -18,6 +18,9 @@ export class AppState {
     constructor(items?: Array<Item>) {
         this.items$ = items
             ? new BehaviorSubject<Item[]>(items)
+    constructor(defaultItems?: Array<Item>) {
+        this.items$ = defaultItems
+            ? new BehaviorSubject<Item[]>(defaultItems)
             : new BehaviorSubject<Item[]>(JSON.parse(localStorage.getItem(AppState.STORAGE_KEY) || "[]"))
 
         this.items$.subscribe(items => {
