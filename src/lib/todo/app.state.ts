@@ -11,13 +11,10 @@ export class AppState {
 
     static STORAGE_KEY = "todos";
 
-    items$: BehaviorSubject<Item[]>
-    completed$: Observable<boolean>
-    remaining$: Observable<Item[]>
+    public readonly items$: BehaviorSubject<Item[]>
+    public readonly completed$: Observable<boolean>
+    public readonly remaining$: Observable<Item[]>
 
-    constructor(items?: Array<Item>) {
-        this.items$ = items
-            ? new BehaviorSubject<Item[]>(items)
     constructor(defaultItems?: Array<Item>) {
         this.items$ = defaultItems
             ? new BehaviorSubject<Item[]>(defaultItems)

@@ -12,10 +12,10 @@ enum FilterMode {
 
 export class TitleView implements VirtualDOM {
 
-    class = 'text-center w-100 border rounded p-2 my-3'
-    children: VirtualDOM[]
+    public readonly class = 'text-center w-100 border rounded p-2 my-3'
+    public readonly children: VirtualDOM[]
 
-    date$ = timer(0, 1000).pipe(
+    public readonly date$ = timer(0, 1000).pipe(
         map(() => new Date())
     )
 
@@ -40,10 +40,10 @@ export class TitleView implements VirtualDOM {
 
 export class ItemView implements VirtualDOM {
 
-    tag = 'span'
-    class = "item-view d-flex align-items-center my-1 justify-content-between fv-pointer"
+    public readonly tag = 'span'
+    public readonly class = "item-view d-flex align-items-center my-1 justify-content-between fv-pointer"
 
-    children: VirtualDOM[]
+    public readonly children: VirtualDOM[]
     public readonly state: AppState
     public readonly item: Item
     private readonly editing$ = new BehaviorSubject<boolean>(false)
@@ -100,11 +100,11 @@ export class ItemView implements VirtualDOM {
 
 export class ItemsView implements VirtualDOM {
 
-    class = "border rounded p-2 m-2 flex-grow-1 overflow-auto"
-    style = {
+    public readonly class = "border rounded p-2 m-2 flex-grow-1 overflow-auto"
+    public readonly style = {
         'min-height': '200px'
     }
-    children: Stream$<Item[], VirtualDOM[]>
+    public readonly children: Stream$<Item[], VirtualDOM[]>
 
     private filters = {
         [FilterMode.All]: () => true,
@@ -127,13 +127,14 @@ export class ItemsView implements VirtualDOM {
 
 export class NewItemView {
 
-    tag = 'header'
-    children: VirtualDOM[]
-    completed$: Observable<any>
-    class = 'd-flex align-items-center my-3 justify-content-around'
-    style = {
+    public readonly tag = 'header'
+    public readonly children: VirtualDOM[]
+    public readonly completed$: Observable<any>
+    public readonly class = 'd-flex align-items-center my-3 justify-content-around'
+    public readonly style = {
         fontSize: 'x-large'
     }
+
     constructor(state) {
 
         this.children = [
@@ -158,8 +159,8 @@ export class NewItemView {
 
 export class FooterView {
 
-    class = 'd-flex align-items-center px-3 border-top py-2 text-secondary'
-    children: VirtualDOM[]
+    public readonly class = 'd-flex align-items-center px-3 border-top py-2 text-secondary'
+    public readonly children: VirtualDOM[]
 
     constructor(state, filterMode$: BehaviorSubject<FilterMode>) {
 
